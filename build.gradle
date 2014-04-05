@@ -1,0 +1,38 @@
+apply plugin: "groovy"
+apply plugin: "eclipse"
+apply plugin: "idea"
+
+project.ext.kettle_version = '5.0+'
+description = "Annotation processor for building PDI plugins"
+
+// Spock works with Java 1.5 and above
+sourceCompatibility = 1.6
+
+repositories {
+   ivy {
+    url "http://repo.pentaho.org/artifactory/repo/"
+    layout  "pattern", {
+      ivy "[organisation]/[module]/[revision]/[module]-[revision].ivy.xml"
+      artifact "[organisation]/[module]/[revision]/[module]-[revision].jar"
+      m2compatible = true
+    }
+  }
+  maven {
+    url 'http://repo.pentaho.org/artifactory/repo'
+  }
+  
+  mavenCentral()
+  
+  mavenLocal()
+  
+}
+
+dependencies {
+  compile "org.codehaus.groovy:groovy-all:2.1.5"
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "1.8"
+}
+
+
